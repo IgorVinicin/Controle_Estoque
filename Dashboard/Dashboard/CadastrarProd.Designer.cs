@@ -43,6 +43,7 @@
             this.btnCadastrarProd = new System.Windows.Forms.Button();
             this.txtQuantProd = new System.Windows.Forms.TextBox();
             this.txtNomeProd = new System.Windows.Forms.TextBox();
+            this.btnImportar = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.btnImportar);
             this.panel2.Controls.Add(this.btnCancelar);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.txtPrecoCusto);
@@ -227,6 +229,20 @@
             this.txtNomeProd.Size = new System.Drawing.Size(388, 26);
             this.txtNomeProd.TabIndex = 0;
             // 
+            // btnImportar
+            // 
+            this.btnImportar.BackColor = System.Drawing.Color.PaleGreen;
+            this.btnImportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImportar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImportar.ForeColor = System.Drawing.Color.Black;
+            this.btnImportar.Location = new System.Drawing.Point(102, 325);
+            this.btnImportar.Name = "btnImportar";
+            this.btnImportar.Size = new System.Drawing.Size(116, 41);
+            this.btnImportar.TabIndex = 19;
+            this.btnImportar.Text = "Importar Planilha";
+            this.btnImportar.UseVisualStyleBackColor = false;
+            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
+            // 
             // CadastrarProd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -260,5 +276,6 @@
         private System.Windows.Forms.Button btnCadastrarProd;
         private System.Windows.Forms.TextBox txtQuantProd;
         private System.Windows.Forms.TextBox txtNomeProd;
+        private System.Windows.Forms.Button btnImportar;
     }
 }

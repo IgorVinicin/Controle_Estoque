@@ -32,22 +32,7 @@ CREATE TABLE entrada_saida (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
-CREATE TABLE venda (
-    id_venda INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    data_venda TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    total DECIMAL(10,2),
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
-);
+INSERT INTO usuario (nome, email, senha, tipo)
+VALUES ('Operador 1', 'Operador@chriscell.com', '12345', 'admin');
 
-CREATE TABLE venda_item (
-    id_item INT AUTO_INCREMENT PRIMARY KEY,
-    id_venda INT NOT NULL,
-    id_produto INT NOT NULL,
-    quantidade INT NOT NULL,
-    preco_unitario DECIMAL(10,2) NOT NULL,
-    subtotal DECIMAL(10,2) GENERATED ALWAYS AS (quantidade * preco_unitario) STORED,
-    FOREIGN KEY (id_venda) REFERENCES venda(id_venda),
-    FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
-);
 

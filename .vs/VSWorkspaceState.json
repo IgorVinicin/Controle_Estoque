@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Dashboard",
+    "\\Dashboard\\Dashboard"
   ],
-  "SelectedNode": "\\bd_ESTOQUE.sql",
+  "SelectedNode": "\\Dashboard\\Dashboard.sln",
   "PreviewInSolutionExplorer": false
 }
