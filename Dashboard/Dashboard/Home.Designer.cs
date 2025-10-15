@@ -147,8 +147,9 @@
             // 
             // listViewHistorico
             // 
+            this.listViewHistorico.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewHistorico.HideSelection = false;
-            this.listViewHistorico.Location = new System.Drawing.Point(3, -1);
+            this.listViewHistorico.Location = new System.Drawing.Point(-1, -1);
             this.listViewHistorico.Name = "listViewHistorico";
             this.listViewHistorico.Size = new System.Drawing.Size(682, 476);
             this.listViewHistorico.TabIndex = 16;
@@ -157,6 +158,7 @@
             // 
             // listViewEstoque
             // 
+            this.listViewEstoque.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
             this.listViewEstoque.HideSelection = false;
             this.listViewEstoque.Location = new System.Drawing.Point(-1, -1);
             this.listViewEstoque.Name = "listViewEstoque";
@@ -215,6 +217,7 @@
             // 
             // listViewProd
             // 
+            this.listViewProd.Font = new System.Drawing.Font("Segoe UI Symbol", 12F);
             this.listViewProd.HideSelection = false;
             this.listViewProd.Location = new System.Drawing.Point(17, 179);
             this.listViewProd.Name = "listViewProd";
@@ -257,6 +260,7 @@
             // 
             // cmbProd
             // 
+            this.cmbProd.Font = new System.Drawing.Font("Segoe UI Symbol", 8F);
             this.cmbProd.FormattingEnabled = true;
             this.cmbProd.Location = new System.Drawing.Point(16, 86);
             this.cmbProd.Name = "cmbProd";

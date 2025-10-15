@@ -44,7 +44,6 @@ C:\Users\Micro\source\repos\Dashboard\Dashboard\bin\Debug\System.Runtime.Compile
 C:\Users\Micro\source\repos\Dashboard\Dashboard\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Micro\source\repos\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.Up2Date
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.csproj.AssemblyReference.cache
-C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.exe.config
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.exe
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.pdb
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\Dashboard.exe.config
@@ -96,3 +95,8 @@ C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\E
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\ExcelDataReader.DataSet.pdb
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\ExcelDataReader.DataSet.xml
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\System.ValueTuple.xml
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\Dashboard.exe.manifest
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\Dashboard.application
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.exe.manifest
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.application
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.exe.config
