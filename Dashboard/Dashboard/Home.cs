@@ -9,6 +9,8 @@ using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using ClosedXML.Excel;
+
 
 
 namespace Dashboard
@@ -17,8 +19,9 @@ namespace Dashboard
     {
         public frmDashBoard()
         {
+         
             InitializeComponent();
-            RoundPanelCorners(panelVendas, 20); 
+            RoundPanelCorners(panelVendas, 20);
             RoundPanelCorners(panelRei, 20);
 
         }
@@ -36,35 +39,27 @@ namespace Dashboard
             panel.Region = new Region(path);
         }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void toolStripLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripContainer1_TopToolStripPanel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnEstoque_Click(object sender, EventArgs e)
         {
             listViewEstoque.Visible = true;
             listViewHistorico.Visible = false;
             panelVendas.Visible = false;
-            CarregarEstoque();
+            btnExportarHistorico.Visible = false;
+            btnExportarEstoque.Visible = true;
+            btnApagarHistorico.Visible = false;
 
+            CarregarEstoque();
 
         }
 
         private void btnVender_Click(object sender, EventArgs e)
         {
             listViewEstoque.Visible = false;
+            btnExportarHistorico.Visible = false;
             panelVendas.Visible = true;
+
+            btnApagarHistorico.Visible = false;
+            btnExportarEstoque.Visible = false;
             listViewHistorico.Visible = false;
         }
 
@@ -84,21 +79,21 @@ namespace Dashboard
         {
             /*select no cmbProd */
             LoadProductsIntoComboBox();
-            
-            
-
+            LoadFormaPagamento();
 
             /*Configurações iniciais do listView*/
             if (listViewProd.Columns.Count == 0)
             {
                 listViewProd.View = View.Details;
-                listViewProd.Columns.Add("Produto", 150);
-                listViewProd.Columns.Add("Quantidade", 80);
+                listViewProd.Columns.Add("Produto", 100);
+                listViewProd.Columns.Add("Quantidade", 110);
+                listViewProd.Columns.Add("Forma Pagamento", 150);
+
             }
             if (listViewEstoque.Columns.Count == 0)
             {
                 listViewEstoque.View = View.Details;
-                listViewEstoque.Columns.Add("Produto", 100);
+                listViewEstoque.Columns.Add("Produto", 400);
                 listViewEstoque.Columns.Add("Quantidade", 100);
                 listViewEstoque.Columns.Add("EstoqueMinimo", 100);
                 listViewEstoque.Columns.Add("PrecoCusto", 100);
@@ -109,15 +104,16 @@ namespace Dashboard
             if (listViewHistorico.Columns.Count == 0)
             {
                 listViewHistorico.View = View.Details;
-                listViewHistorico.Columns.Add("Produto", 200);
+                listViewHistorico.Columns.Add("Produto", 400);
                 listViewHistorico.Columns.Add("TotalVenda", 200);
                 listViewHistorico.Columns.Add("Data", 200);
+                listViewHistorico.Columns.Add("Forma de Pagamento", 200);
                 listViewHistorico.Columns.Add("Observação", 200);
             }
         }
 
-        private void CarregarEstoque() 
-        { 
+        private void CarregarEstoque()
+        {
             listViewEstoque.Items.Clear();
             int itensBaixoEstoque = 0;
             int itensEsgotados = 0;
@@ -130,9 +126,9 @@ namespace Dashboard
                 {
                     conexao.Open();
                     string query = "SELECT NomeProduto, Quantidade, EstoqueMinimo, PrecoCusto, PrecoVenda, data_cadastro FROM produtos";
-                    using(MySqlCommand command = new MySqlCommand(query, conexao))
+                    using (MySqlCommand command = new MySqlCommand(query, conexao))
                     {
-                        using(MySqlDataReader reader = command.ExecuteReader())
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -203,22 +199,50 @@ namespace Dashboard
             }
         }
 
-       
+        private void LoadFormaPagamento()
+        {
+            try
+            {
+                string connectionString = "server=localhost;user=root;password=;database=ChrisCell";
+                using (MySqlConnection conexao = new MySqlConnection(connectionString))
+                {
+                    conexao.Open();
+                    string query = "SELECT NomeForma FROM forma_pagamento";
+                    using (MySqlCommand command = new MySqlCommand(query, conexao))
+                    {
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string formaPagamento = reader["NomeForma"].ToString();
+                                cmbFormaPagamento.Items.Add(formaPagamento);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar formas de pagamento: " + ex.Message);
+            }
+        }
 
         private void btnAddProd_Click(object sender, EventArgs e)
         {
-            if (cmbProd.SelectedItem == null || string.IsNullOrWhiteSpace(txtQuant.Text))
+            if (cmbProd.SelectedItem == null || string.IsNullOrWhiteSpace(txtQuant.Text) || cmbFormaPagamento.SelectedItem == null)
             {
-                MessageBox.Show("Por favor, selecione um produto e insira a quantidade.");
+                MessageBox.Show("Por favor, selecione um produto, a forma de pagamento e insira a quantidade.");
                 return;
             }
             else
             {
                 string produto = cmbProd.SelectedItem.ToString();
                 string quantidade = txtQuant.Text;
+                string formaPagamento = cmbFormaPagamento.SelectedItem.ToString();
 
                 ListViewItem item = new ListViewItem(produto);
                 item.SubItems.Add(quantidade);
+                ListViewItem itemForma = new ListViewItem(formaPagamento);
 
                 listViewProd.Items.Add(item);
                 lblCount.Text = $"{listViewProd.Items.Count}";
@@ -281,8 +305,8 @@ namespace Dashboard
 
                         // Salva a venda na tabela entrada_saida
                         string insertQuery = @"INSERT INTO entrada_saida 
-                            (id_produto, id_usuario, tipo, quantidade, data_movimento, observacao) 
-                            VALUES (@id_produto, @id_usuario, @tipo, @quantidade, @data_movimento, @observacao)";
+                            (id_produto, id_usuario, tipo, quantidade, data_movimento, observacao, id_pagamento) 
+                            VALUES (@id_produto, @id_usuario, @tipo, @quantidade, @data_movimento, @observacao, @pagamento)";
 
                         using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                         {
@@ -291,6 +315,7 @@ namespace Dashboard
                             insertCmd.Parameters.AddWithValue("@tipo", "saida");
                             insertCmd.Parameters.AddWithValue("@quantidade", quantidadeVendida);
                             insertCmd.Parameters.AddWithValue("@data_movimento", DateTime.Now);
+                            insertCmd.Parameters.AddWithValue("@pagamento", cmbFormaPagamento.SelectedIndex + 1); // ajuste conforme seu sistema de pagamento
                             insertCmd.Parameters.AddWithValue("@observacao", $"Venda de {nomeProduto} ({quantidadeVendida} x R$ {valorUnitario:F2})");
 
                             insertCmd.ExecuteNonQuery();
@@ -381,9 +406,10 @@ namespace Dashboard
                 {
                     connection.Open();
                     // Busca apenas movimentos de saída (venda)
-                    string query = @"SELECT es.id_movimento, p.NomeProduto, es.quantidade, es.data_movimento, es.observacao
+                    string query = @"SELECT es.id_movimento, p.NomeProduto, es.quantidade, es.data_movimento, es.observacao, fp.NomeForma
                                      FROM entrada_saida es
                                      JOIN produtos p ON es.id_produto = p.id_produto
+                                     join forma_pagamento fp ON es.id_pagamento = fp.id_pagamento
                                      WHERE es.tipo = 'saida'
                                      ORDER BY es.data_movimento DESC";
                     using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -395,6 +421,7 @@ namespace Dashboard
                                 var item = new ListViewItem(reader["NomeProduto"].ToString());
                                 item.SubItems.Add(reader["quantidade"].ToString());
                                 item.SubItems.Add(Convert.ToDateTime(reader["data_movimento"]).ToString("dd/MM/yyyy HH:mm"));
+                                item.SubItems.Add(reader["NomeForma"].ToString());
                                 item.SubItems.Add(reader["observacao"].ToString());
                                 listViewHistorico.Items.Add(item);
                             }
@@ -416,8 +443,96 @@ namespace Dashboard
         {
             listViewHistorico.Visible = true;
             listViewEstoque.Visible = false;
+            btnExportarEstoque.Visible = false;
             panelVendas.Visible = false;
+            btnExportarHistorico.Visible = true;
+            btnApagarHistorico.Visible = true;
             CarregarHistoricoVendas();
+        }
+
+        private void cmbProd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; // Bloqueia a tecla
+            }
+        }
+
+        private void cmbFormaPagamento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; // Bloqueia a tecla
+            }
+        }
+
+        private void btnApagarHistorico_Click(object sender, EventArgs e)
+        {
+            listViewHistorico.Items.Clear();
+        }
+
+        private void btnExportarEstoque_Click(object sender, EventArgs e)
+        {
+            ExportarEstoque();
+        }
+
+        private void ExportarEstoque()
+        {
+            var wb = new XLWorkbook();
+            var ws = wb.Worksheets.Add("Estoque");
+
+            // Cabeçalhos
+            for (int i = 0; i < listViewEstoque.Columns.Count; i++)
+                ws.Cell(1, i + 1).Value = listViewEstoque.Columns[i].Text;
+
+            // Dados
+            for (int i = 0; i < listViewEstoque.Items.Count; i++)
+                for (int j = 0; j < listViewEstoque.Items[i].SubItems.Count; j++)
+                    ws.Cell(i + 2, j + 1).Value = listViewEstoque.Items[i].SubItems[j].Text;
+
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Excel Files|*.xlsx",
+                Title = "Estoque Atual"
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                wb.SaveAs(saveFileDialog.FileName);
+                MessageBox.Show("Exportação concluída com sucesso!", "Exportar Estoque", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnExportarHistorico_Click(object sender, EventArgs e)
+        {
+            ExportarHistorico();
+        }
+
+        private void ExportarHistorico()
+        {
+            var wb = new XLWorkbook();
+            var ws = wb.Worksheets.Add("Estoque");
+
+            // Cabeçalhos
+            for (int i = 0; i < listViewHistorico.Columns.Count; i++)
+                ws.Cell(1, i + 1).Value = listViewEstoque.Columns[i].Text;
+
+            // Dados
+            for (int i = 0; i < listViewHistorico.Items.Count; i++)
+                for (int j = 0; j < listViewHistorico.Items[i].SubItems.Count; j++)
+                    ws.Cell(i + 2, j + 1).Value = listViewHistorico.Items[i].SubItems[j].Text;
+
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Excel Files|*.xlsx",
+                Title = "Historico vendas"
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                wb.SaveAs(saveFileDialog.FileName);
+                MessageBox.Show("Exportação concluída com sucesso!", "Exportar Estoque", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

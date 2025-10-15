@@ -37,6 +37,7 @@
             this.listViewHistorico = new System.Windows.Forms.ListView();
             this.listViewEstoque = new System.Windows.Forms.ListView();
             this.panelVendas = new System.Windows.Forms.Panel();
+            this.cmbFormaPagamento = new System.Windows.Forms.ComboBox();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btn = new System.Windows.Forms.Button();
             this.listViewProd = new System.Windows.Forms.ListView();
@@ -61,6 +62,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.btnHistorico = new System.Windows.Forms.Button();
+            this.btnApagarHistorico = new System.Windows.Forms.Button();
+            this.btnExportarEstoque = new System.Windows.Forms.Button();
+            this.btnExportarHistorico = new System.Windows.Forms.Button();
             this.panelRei.SuspendLayout();
             this.panelVendas.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -151,7 +155,7 @@
             this.listViewHistorico.HideSelection = false;
             this.listViewHistorico.Location = new System.Drawing.Point(-1, -1);
             this.listViewHistorico.Name = "listViewHistorico";
-            this.listViewHistorico.Size = new System.Drawing.Size(682, 476);
+            this.listViewHistorico.Size = new System.Drawing.Size(1127, 476);
             this.listViewHistorico.TabIndex = 16;
             this.listViewHistorico.UseCompatibleStateImageBehavior = false;
             this.listViewHistorico.Visible = false;
@@ -162,7 +166,7 @@
             this.listViewEstoque.HideSelection = false;
             this.listViewEstoque.Location = new System.Drawing.Point(-1, -1);
             this.listViewEstoque.Name = "listViewEstoque";
-            this.listViewEstoque.Size = new System.Drawing.Size(682, 476);
+            this.listViewEstoque.Size = new System.Drawing.Size(1127, 476);
             this.listViewEstoque.TabIndex = 15;
             this.listViewEstoque.UseCompatibleStateImageBehavior = false;
             this.listViewEstoque.Visible = false;
@@ -171,6 +175,7 @@
             // 
             this.panelVendas.BackColor = System.Drawing.Color.White;
             this.panelVendas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelVendas.Controls.Add(this.cmbFormaPagamento);
             this.panelVendas.Controls.Add(this.btnLimpar);
             this.panelVendas.Controls.Add(this.btn);
             this.panelVendas.Controls.Add(this.listViewProd);
@@ -186,6 +191,17 @@
             this.panelVendas.Size = new System.Drawing.Size(439, 476);
             this.panelVendas.TabIndex = 19;
             this.panelVendas.Visible = false;
+            // 
+            // cmbFormaPagamento
+            // 
+            this.cmbFormaPagamento.Font = new System.Drawing.Font("Segoe UI Symbol", 8F);
+            this.cmbFormaPagamento.FormattingEnabled = true;
+            this.cmbFormaPagamento.Location = new System.Drawing.Point(278, 145);
+            this.cmbFormaPagamento.Name = "cmbFormaPagamento";
+            this.cmbFormaPagamento.Size = new System.Drawing.Size(132, 21);
+            this.cmbFormaPagamento.TabIndex = 16;
+            this.cmbFormaPagamento.Text = "Forma de pagamento";
+            this.cmbFormaPagamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbFormaPagamento_KeyPress);
             // 
             // btnLimpar
             // 
@@ -221,7 +237,7 @@
             this.listViewProd.HideSelection = false;
             this.listViewProd.Location = new System.Drawing.Point(17, 179);
             this.listViewProd.Name = "listViewProd";
-            this.listViewProd.Size = new System.Drawing.Size(393, 212);
+            this.listViewProd.Size = new System.Drawing.Size(393, 180);
             this.listViewProd.TabIndex = 13;
             this.listViewProd.UseCompatibleStateImageBehavior = false;
             // 
@@ -267,6 +283,7 @@
             this.cmbProd.Size = new System.Drawing.Size(266, 21);
             this.cmbProd.TabIndex = 9;
             this.cmbProd.Text = "Escolher um produto";
+            this.cmbProd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbProd_KeyPress);
             // 
             // lblCalculadora
             // 
@@ -468,12 +485,63 @@
             this.btnHistorico.UseVisualStyleBackColor = false;
             this.btnHistorico.Click += new System.EventHandler(this.btnHistorico_Click_1);
             // 
+            // btnApagarHistorico
+            // 
+            this.btnApagarHistorico.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnApagarHistorico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApagarHistorico.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApagarHistorico.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnApagarHistorico.Location = new System.Drawing.Point(884, 297);
+            this.btnApagarHistorico.Name = "btnApagarHistorico";
+            this.btnApagarHistorico.Size = new System.Drawing.Size(151, 37);
+            this.btnApagarHistorico.TabIndex = 23;
+            this.btnApagarHistorico.TabStop = false;
+            this.btnApagarHistorico.Text = "Apagar Histórico";
+            this.btnApagarHistorico.UseVisualStyleBackColor = false;
+            this.btnApagarHistorico.Visible = false;
+            this.btnApagarHistorico.Click += new System.EventHandler(this.btnApagarHistorico_Click);
+            // 
+            // btnExportarEstoque
+            // 
+            this.btnExportarEstoque.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnExportarEstoque.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportarEstoque.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportarEstoque.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnExportarEstoque.Location = new System.Drawing.Point(1040, 297);
+            this.btnExportarEstoque.Name = "btnExportarEstoque";
+            this.btnExportarEstoque.Size = new System.Drawing.Size(151, 37);
+            this.btnExportarEstoque.TabIndex = 24;
+            this.btnExportarEstoque.TabStop = false;
+            this.btnExportarEstoque.Text = "Exportar Estoque";
+            this.btnExportarEstoque.UseVisualStyleBackColor = false;
+            this.btnExportarEstoque.Visible = false;
+            this.btnExportarEstoque.Click += new System.EventHandler(this.btnExportarEstoque_Click);
+            // 
+            // btnExportarHistorico
+            // 
+            this.btnExportarHistorico.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnExportarHistorico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportarHistorico.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportarHistorico.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnExportarHistorico.Location = new System.Drawing.Point(1040, 297);
+            this.btnExportarHistorico.Name = "btnExportarHistorico";
+            this.btnExportarHistorico.Size = new System.Drawing.Size(151, 37);
+            this.btnExportarHistorico.TabIndex = 25;
+            this.btnExportarHistorico.TabStop = false;
+            this.btnExportarHistorico.Text = "Exportar Histórico";
+            this.btnExportarHistorico.UseVisualStyleBackColor = false;
+            this.btnExportarHistorico.Visible = false;
+            this.btnExportarHistorico.Click += new System.EventHandler(this.btnExportarHistorico_Click);
+            // 
             // frmDashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1223, 840);
+            this.Controls.Add(this.btnExportarHistorico);
+            this.Controls.Add(this.btnExportarEstoque);
+            this.Controls.Add(this.btnApagarHistorico);
             this.Controls.Add(this.btnHistorico);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.panelVendas);
@@ -542,6 +610,10 @@
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnHistorico;
         private System.Windows.Forms.ListView listViewHistorico;
+        private System.Windows.Forms.ComboBox cmbFormaPagamento;
+        private System.Windows.Forms.Button btnApagarHistorico;
+        private System.Windows.Forms.Button btnExportarEstoque;
+        private System.Windows.Forms.Button btnExportarHistorico;
     }
 }
 

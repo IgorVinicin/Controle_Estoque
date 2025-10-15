@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Dashboard",
+    "\\Dashboard\\Dashboard"
   ],
-  "SelectedNode": "\\Dashboard.sln",
+  "SelectedNode": "\\Dashboard\\Dashboard\\Home.cs",
   "PreviewInSolutionExplorer": false
 }
