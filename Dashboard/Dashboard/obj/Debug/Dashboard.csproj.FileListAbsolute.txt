@@ -125,3 +125,4 @@ C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\E
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\Microsoft.Bcl.HashCode.xml
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\RBush.xml
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\SixLabors.Fonts.xml
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.EditarProd.resources

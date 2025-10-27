@@ -1,6 +1,6 @@
 create database ChrisCell;
 use ChrisCell;
-
+set global max_connections = 500;
 
 CREATE TABLE usuario (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,6 +20,7 @@ CREATE TABLE produtos (
     id_produto INT AUTO_INCREMENT PRIMARY KEY,
     NomeProduto VARCHAR(100) NOT NULL,
     Quantidade int,
+    Categoria Varchar(100) not null,
     precoCusto DECIMAL(10,2) NOT NULL,
     precoVenda DECIMAL(10,2) NOT NULL,
     EstoqueMinimo INT DEFAULT 0,

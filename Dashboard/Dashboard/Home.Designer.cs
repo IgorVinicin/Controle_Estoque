@@ -65,6 +65,8 @@
             this.btnApagarHistorico = new System.Windows.Forms.Button();
             this.btnExportarEstoque = new System.Windows.Forms.Button();
             this.btnExportarHistorico = new System.Windows.Forms.Button();
+            this.btnEditarProd = new System.Windows.Forms.Button();
+            this.cmbCategoria = new System.Windows.Forms.ComboBox();
             this.panelRei.SuspendLayout();
             this.panelVendas.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -175,6 +177,7 @@
             // 
             this.panelVendas.BackColor = System.Drawing.Color.White;
             this.panelVendas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelVendas.Controls.Add(this.cmbCategoria);
             this.panelVendas.Controls.Add(this.cmbFormaPagamento);
             this.panelVendas.Controls.Add(this.btnLimpar);
             this.panelVendas.Controls.Add(this.btn);
@@ -278,11 +281,12 @@
             // 
             this.cmbProd.Font = new System.Drawing.Font("Segoe UI Symbol", 8F);
             this.cmbProd.FormattingEnabled = true;
-            this.cmbProd.Location = new System.Drawing.Point(16, 86);
+            this.cmbProd.Location = new System.Drawing.Point(232, 85);
             this.cmbProd.Name = "cmbProd";
-            this.cmbProd.Size = new System.Drawing.Size(266, 21);
+            this.cmbProd.Size = new System.Drawing.Size(178, 21);
             this.cmbProd.TabIndex = 9;
-            this.cmbProd.Text = "Escolher um produto";
+            this.cmbProd.SelectedIndexChanged += new System.EventHandler(this.cmbProd_SelectedIndexChanged);
+            this.cmbProd.TextUpdate += new System.EventHandler(this.cmbProd_TextUpdate);
             this.cmbProd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbProd_KeyPress);
             // 
             // lblCalculadora
@@ -302,7 +306,7 @@
             this.btnAddProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddProd.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddProd.ForeColor = System.Drawing.Color.White;
-            this.btnAddProd.Location = new System.Drawing.Point(383, 86);
+            this.btnAddProd.Location = new System.Drawing.Point(102, 112);
             this.btnAddProd.Name = "btnAddProd";
             this.btnAddProd.Size = new System.Drawing.Size(27, 21);
             this.btnAddProd.TabIndex = 8;
@@ -315,7 +319,7 @@
             // 
             this.txtQuant.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtQuant.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtQuant.Location = new System.Drawing.Point(287, 86);
+            this.txtQuant.Location = new System.Drawing.Point(17, 112);
             this.txtQuant.Multiline = true;
             this.txtQuant.Name = "txtQuant";
             this.txtQuant.Size = new System.Drawing.Size(79, 21);
@@ -533,12 +537,39 @@
             this.btnExportarHistorico.Visible = false;
             this.btnExportarHistorico.Click += new System.EventHandler(this.btnExportarHistorico_Click);
             // 
+            // btnEditarProd
+            // 
+            this.btnEditarProd.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnEditarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditarProd.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditarProd.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnEditarProd.Location = new System.Drawing.Point(883, 33);
+            this.btnEditarProd.Name = "btnEditarProd";
+            this.btnEditarProd.Size = new System.Drawing.Size(151, 37);
+            this.btnEditarProd.TabIndex = 26;
+            this.btnEditarProd.TabStop = false;
+            this.btnEditarProd.Text = "- Editar Produto";
+            this.btnEditarProd.UseVisualStyleBackColor = false;
+            this.btnEditarProd.Click += new System.EventHandler(this.btnEditarProd_Click);
+            // 
+            // cmbCategoria
+            // 
+            this.cmbCategoria.Font = new System.Drawing.Font("Segoe UI Symbol", 8F);
+            this.cmbCategoria.FormattingEnabled = true;
+            this.cmbCategoria.Location = new System.Drawing.Point(16, 85);
+            this.cmbCategoria.Name = "cmbCategoria";
+            this.cmbCategoria.Size = new System.Drawing.Size(210, 21);
+            this.cmbCategoria.TabIndex = 17;
+            this.cmbCategoria.Text = "Categoria";
+            this.cmbCategoria.SelectedIndexChanged += new System.EventHandler(this.cmbCategoria_SelectedIndexChanged);
+            // 
             // frmDashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1223, 840);
+            this.Controls.Add(this.btnEditarProd);
             this.Controls.Add(this.btnExportarHistorico);
             this.Controls.Add(this.btnExportarEstoque);
             this.Controls.Add(this.btnApagarHistorico);
@@ -614,6 +645,8 @@
         private System.Windows.Forms.Button btnApagarHistorico;
         private System.Windows.Forms.Button btnExportarEstoque;
         private System.Windows.Forms.Button btnExportarHistorico;
+        private System.Windows.Forms.Button btnEditarProd;
+        private System.Windows.Forms.ComboBox cmbCategoria;
     }
 }
 

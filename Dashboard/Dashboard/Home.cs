@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Office2010.CustomUI;
 
 
 
@@ -19,7 +20,7 @@ namespace Dashboard
     {
         public frmDashBoard()
         {
-         
+
             InitializeComponent();
             RoundPanelCorners(panelVendas, 20);
             RoundPanelCorners(panelRei, 20);
@@ -80,6 +81,7 @@ namespace Dashboard
             /*select no cmbProd */
             LoadProductsIntoComboBox();
             LoadFormaPagamento();
+            CarregarCategorias();
 
             /*Configurações iniciais do listView*/
             if (listViewProd.Columns.Count == 0)
@@ -93,7 +95,9 @@ namespace Dashboard
             if (listViewEstoque.Columns.Count == 0)
             {
                 listViewEstoque.View = View.Details;
+                listViewEstoque.Columns.Add("ID", 100);
                 listViewEstoque.Columns.Add("Produto", 400);
+                listViewEstoque.Columns.Add("Categoria", 150);
                 listViewEstoque.Columns.Add("Quantidade", 100);
                 listViewEstoque.Columns.Add("EstoqueMinimo", 100);
                 listViewEstoque.Columns.Add("PrecoCusto", 100);
@@ -105,6 +109,7 @@ namespace Dashboard
             {
                 listViewHistorico.View = View.Details;
                 listViewHistorico.Columns.Add("Produto", 400);
+                listViewEstoque.Columns.Add("Categoria", 150);
                 listViewHistorico.Columns.Add("TotalVenda", 200);
                 listViewHistorico.Columns.Add("Data", 200);
                 listViewHistorico.Columns.Add("Forma de Pagamento", 200);
@@ -125,7 +130,7 @@ namespace Dashboard
                 using (MySqlConnection conexao = new MySqlConnection(connectionString))
                 {
                     conexao.Open();
-                    string query = "SELECT NomeProduto, Quantidade, EstoqueMinimo, PrecoCusto, PrecoVenda, data_cadastro FROM produtos";
+                    string query = "SELECT id_produto, NomeProduto, Categoria, Quantidade, EstoqueMinimo, PrecoCusto, PrecoVenda, data_cadastro FROM produtos";
                     using (MySqlCommand command = new MySqlCommand(query, conexao))
                     {
                         using (MySqlDataReader reader = command.ExecuteReader())
@@ -133,10 +138,12 @@ namespace Dashboard
                             while (reader.Read())
                             {
                                 // Adiciona os itens ao ListView
-                                var item = new ListViewItem(reader["NomeProduto"].ToString());
+                                var item = new ListViewItem(reader["id_produto"].ToString());
                                 int quantidade = Convert.ToInt32(reader["Quantidade"]);
                                 int estoqueMinimo = Convert.ToInt32(reader["EstoqueMinimo"]);
 
+                                item.SubItems.Add(reader["NomeProduto"].ToString());
+                                item.SubItems.Add(reader["Categoria"].ToString());
                                 item.SubItems.Add(reader["Quantidade"].ToString());
                                 item.SubItems.Add(reader["EstoqueMinimo"].ToString());
                                 item.SubItems.Add(reader["PrecoCusto"].ToString());
@@ -534,5 +541,131 @@ namespace Dashboard
                 MessageBox.Show("Exportação concluída com sucesso!", "Exportar Estoque", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void cmbProd_TextUpdate(object sender, EventArgs e)
+        {
+            string filtro = cmbProd.Text.Trim();
+            string connectionString = "server=localhost;user=root;password=;database=ChrisCell";
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = "SELECT NomeProduto FROM produtos WHERE NomeProduto LIKE @filtro ORDER BY NomeProduto ASC";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
+
+                    MySqlDataReader dr = cmd.ExecuteReader();
+
+
+                    string textoAtual = cmbProd.Text;
+
+                    cmbProd.Items.Clear();
+                    while (dr.Read())
+                    {
+                        cmbProd.Items.Add(dr["NomeProduto"].ToString());
+                    }
+
+                    cmbProd.DroppedDown = true; // abre o dropdown automaticamente
+                    cmbProd.Text = textoAtual; // mantém o texto digitado
+                    cmbProd.SelectionStart = textoAtual.Length; // mantém o cursor no fim
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao filtrar produtos: " + ex.Message);
+            }
+
+        }
+
+        private void btnEditarProd_Click(object sender, EventArgs e)
+        {
+            EditarProd editarprod = new EditarProd();
+            editarprod.Show();
+        }
+
+        private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Verifica se algo está selecionado
+            if (cmbCategoria.SelectedItem == null)
+            {
+                cmbProd.Items.Clear(); // Limpa a ComboBox de Produtos se a categoria for nula
+                return;
+            }
+
+            string categoriaSelecionada = cmbCategoria.SelectedItem.ToString();
+
+            // Se a categoria for a string vazia (o seu item de limpar o filtro)
+            if (string.IsNullOrEmpty(categoriaSelecionada))
+            {
+                cmbProd.Items.Clear(); // Simplesmente limpa a lista de produtos
+            }
+            else
+            {
+                CarregarProdutoPorCategoria(categoriaSelecionada);
+            }
+        }
+
+
+        private void CarregarCategorias()
+        {
+            // String de conexão aprimorada para melhor gerenciamento de pool.
+            string connectionString = "server=localhost;user=root;password=;database=ChrisCell;Pooling=true;Max Pool Size=200;Connection Timeout=30";
+
+            cmbCategoria.Items.Clear();
+            cmbCategoria.Items.Add(""); // Opção vazia/limpar filtro
+
+            try
+            {
+                // Garante que a conexão será fechada/liberada
+                using (MySqlConnection conexao = new MySqlConnection(connectionString))
+                {
+                    // Puxa apenas categorias distintas
+                    string query = "SELECT DISTINCT Categoria FROM produtos ORDER BY Categoria";
+
+                    // Garante que o adapter e o comando serão liberados
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conexao))
+                    {
+                        DataTable dt = new DataTable();
+
+                        // .Fill() é a operação mais leve: abre, executa, fecha/libera
+                        adapter.Fill(dt);
+
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            // Verifica DBNull (prevenção contra o primeiro erro que você teve)
+                            if (row["Categoria"] != DBNull.Value)
+                            {
+                                string categoria = row["Categoria"].ToString();
+                                cmbCategoria.Items.Add(categoria);
+                            }
+                        }
+                    } // Adapter liberado
+                } // Conexão liberada
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar categorias: " + ex.Message);
+            }
+        }
+
+        private void cmbCategoria_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; // Bloqueia a digitação no ComboBox
+        }
+
+        private void cmbProd_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarProdutoPorCategoria(cmbCategoria.SelectedItem.ToString());
+        }
+
+
+        private void CarregarProdutoPorCategoria(string categoria)
+        {
+          
+        }
     }
 }
+

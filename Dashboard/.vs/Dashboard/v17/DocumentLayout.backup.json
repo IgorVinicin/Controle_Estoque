@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\dashboard\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|c:\\users\\micro\\documents\\github\\controle_estoque\\dashboard\\dashboard\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|c:\\users\\micro\\documents\\github\\controle_estoque\\dashboard\\dashboard\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\dashboard\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\dashboard\\cadastrarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\cadastrarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|c:\\users\\micro\\documents\\github\\controle_estoque\\dashboard\\dashboard\\editarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\editarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|c:\\users\\micro\\documents\\github\\controle_estoque\\dashboard\\dashboard\\editarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|solutionrelative:dashboard\\editarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F507B47F-1873-44D8-98FD-5AAA52C739FA}|Dashboard\\Dashboard.csproj|C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\dashboard\\cadastrarprod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,19 +34,31 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CadastrarProd.cs",
-              "DocumentMoniker": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\CadastrarProd.cs",
-              "RelativeDocumentMoniker": "Dashboard\\CadastrarProd.cs",
-              "ToolTip": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\CadastrarProd.cs",
-              "RelativeToolTip": "Dashboard\\CadastrarProd.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAIwIoAAAAhAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "EditarProd.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\EditarProd.cs",
+              "RelativeDocumentMoniker": "Dashboard\\EditarProd.cs",
+              "ToolTip": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\EditarProd.cs [Design]",
+              "RelativeToolTip": "Dashboard\\EditarProd.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T19:23:21.557Z",
+              "WhenOpened": "2025-10-27T17:16:57.456Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EditarProd.cs",
+              "DocumentMoniker": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\EditarProd.cs",
+              "RelativeDocumentMoniker": "Dashboard\\EditarProd.cs",
+              "ToolTip": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\EditarProd.cs",
+              "RelativeToolTip": "Dashboard\\EditarProd.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAlwI8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T17:18:26.664Z",
               "EditorCaption": ""
             },
             {
@@ -55,12 +75,25 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CadastrarProd.cs",
+              "DocumentMoniker": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\CadastrarProd.cs",
+              "RelativeDocumentMoniker": "Dashboard\\CadastrarProd.cs",
+              "ToolTip": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\CadastrarProd.cs",
+              "RelativeToolTip": "Dashboard\\CadastrarProd.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAwwEoAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T19:23:21.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Home.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\Home.cs",
               "RelativeDocumentMoniker": "Dashboard\\Home.cs",
-              "ToolTip": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\Home.cs [Design]",
-              "RelativeToolTip": "Dashboard\\Home.cs [Design]",
+              "ToolTip": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\Home.cs [Design]*",
+              "RelativeToolTip": "Dashboard\\Home.cs [Design]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-09T23:58:27.332Z",
               "EditorCaption": " [Design]"
@@ -71,9 +104,9 @@
               "Title": "Home.cs",
               "DocumentMoniker": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\Home.cs",
               "RelativeDocumentMoniker": "Dashboard\\Home.cs",
-              "ToolTip": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\Home.cs",
-              "RelativeToolTip": "Dashboard\\Home.cs",
-              "ViewState": "AgIAAPABAAAAAAAAAAAswBICAAA/AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Micro\\Documents\\GitHub\\Controle_Estoque\\Dashboard\\Dashboard\\Home.cs*",
+              "RelativeToolTip": "Dashboard\\Home.cs*",
+              "ViewState": "AgIAAJACAAAAAAAAAAAAAK0CAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-10T00:16:42.367Z",
               "EditorCaption": ""
