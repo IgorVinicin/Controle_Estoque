@@ -546,6 +546,7 @@ namespace Dashboard
         {
             string filtro = cmbProd.Text.Trim();
             string connectionString = "server=localhost;user=root;password=;database=ChrisCell";
+
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -558,26 +559,34 @@ namespace Dashboard
 
                     MySqlDataReader dr = cmd.ExecuteReader();
 
-
+                    // Salva o texto atual e a seleção por texto
                     string textoAtual = cmbProd.Text;
+                    string selectedText = cmbProd.SelectedItem != null ? cmbProd.SelectedItem.ToString() : null;
 
+                    cmbProd.BeginUpdate();
                     cmbProd.Items.Clear();
                     while (dr.Read())
                     {
                         cmbProd.Items.Add(dr["NomeProduto"].ToString());
                     }
 
-                    cmbProd.DroppedDown = true; // abre o dropdown automaticamente
-                    cmbProd.Text = textoAtual; // mantém o texto digitado
-                    cmbProd.SelectionStart = textoAtual.Length; // mantém o cursor no fim
+                    // Restaura o texto e a seleção (por valor)
+                    if (!string.IsNullOrEmpty(selectedText) && cmbProd.Items.Contains(selectedText))
+                    {
+                        cmbProd.SelectedItem = selectedText;
+                    }
+                    else
+                    {
+                        cmbProd.Text = textoAtual;
+                        cmbProd.SelectionStart = textoAtual.Length; // mantém o cursor no fim
+                    }
+                    cmbProd.EndUpdate();
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao filtrar produtos: " + ex.Message);
             }
-
         }
 
         private void btnEditarProd_Click(object sender, EventArgs e)
@@ -658,13 +667,63 @@ namespace Dashboard
 
         private void cmbProd_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CarregarProdutoPorCategoria(cmbCategoria.SelectedItem.ToString());
+            // Não recarrega a lista de produtos ao selecionar um produto.
+            // Isso evita que a seleção seja removida imediatamente após o usuário clicar em um item.
         }
 
 
         private void CarregarProdutoPorCategoria(string categoria)
         {
-          
+            string connectionString = "server=localhost;user=root;password=;database=ChrisCell";
+            try
+            {
+                // Salva seleção atual (texto) para tentar restaurar após repopular
+                string currentSelection = cmbProd.SelectedItem != null ? cmbProd.SelectedItem.ToString() : cmbProd.Text;
+
+                List<string> produtos = new List<string>();
+                using (MySqlConnection conexao = new MySqlConnection(connectionString))
+                {
+                    conexao.Open();
+                    string query = "SELECT NomeProduto FROM produtos WHERE Categoria = @categoria ORDER BY NomeProduto ASC";
+                    using (MySqlCommand command = new MySqlCommand(query, conexao))
+                    {
+                        command.Parameters.AddWithValue("@categoria", categoria);
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                produtos.Add(reader["NomeProduto"].ToString());
+                            }
+                        }
+                    }
+                }
+
+                cmbProd.BeginUpdate();
+                cmbProd.Items.Clear();
+                foreach (var produto in produtos)
+                {
+                    cmbProd.Items.Add(produto);
+                }
+
+                // Tenta restaurar seleção por valor; se não existir, mantém o texto digito
+                if (!string.IsNullOrEmpty(currentSelection) && cmbProd.Items.Contains(currentSelection))
+                {
+                    cmbProd.SelectedItem = currentSelection;
+                }
+                else
+                {
+                    // mantém o texto (útil quando usuário está digitando um filtro que não seja exatamente um item)
+                    cmbProd.Text = currentSelection;
+                    cmbProd.SelectionStart = cmbProd.Text.Length;
+                }
+                cmbProd.EndUpdate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar produtos por categoria: " + ex.Message);
+
+            }
+            
         }
     }
 }

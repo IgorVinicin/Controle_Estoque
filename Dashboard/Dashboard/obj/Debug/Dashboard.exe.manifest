@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Dashboard.exe" size="161760">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Dashboard.exe" size="162272">
       <assemblyIdentity name="Dashboard" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Ljwx4jejByDWOvyeQyLHGuU8hnBs9gY8eLkOli4MuL8=</dsig:DigestValue>
+        <dsig:DigestValue>JxpLfAL0dl9r+nGjL468RRKFUmwyw1t5X3HdS/d3cLs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
