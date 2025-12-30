@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnConsultar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtPrecoCusto = new System.Windows.Forms.TextBox();
@@ -43,17 +47,19 @@
             this.btnCadastrarProd = new System.Windows.Forms.Button();
             this.txtQuantProd = new System.Windows.Forms.TextBox();
             this.txtNomeProd = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnConsultar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtCodProduto = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.txtCodProduto);
+            this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.btnConsultar);
             this.panel2.Controls.Add(this.label1);
@@ -72,18 +78,69 @@
             this.panel2.Controls.Add(this.btnCadastrarProd);
             this.panel2.Controls.Add(this.txtQuantProd);
             this.panel2.Controls.Add(this.txtNomeProd);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Font = new System.Drawing.Font("Segoe UI Symbol", 10F);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(597, 450);
             this.panel2.TabIndex = 8;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(98, 348);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 41);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "EXCLUIR";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConsultar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultar.ForeColor = System.Drawing.Color.Green;
+            this.btnConsultar.Location = new System.Drawing.Point(490, 123);
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(28, 22);
+            this.btnConsultar.TabIndex = 22;
+            this.btnConsultar.Text = "+";
+            this.btnConsultar.UseVisualStyleBackColor = false;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(432, 99);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 17);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Código";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI Symbol", 10F);
+            this.textBox1.Location = new System.Drawing.Point(433, 119);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(51, 26);
+            this.textBox1.TabIndex = 20;
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.White;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(323, 325);
+            this.btnCancelar.Location = new System.Drawing.Point(317, 348);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 41);
             this.btnCancelar.TabIndex = 18;
@@ -95,7 +152,8 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(99, 259);
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(93, 282);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(129, 17);
             this.label7.TabIndex = 17;
@@ -106,8 +164,9 @@
             // 
             this.txtPrecoCusto.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtPrecoCusto.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPrecoCusto.Font = new System.Drawing.Font("Segoe UI Symbol", 10F);
             this.txtPrecoCusto.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtPrecoCusto.Location = new System.Drawing.Point(103, 279);
+            this.txtPrecoCusto.Location = new System.Drawing.Point(97, 302);
             this.txtPrecoCusto.Multiline = true;
             this.txtPrecoCusto.Name = "txtPrecoCusto";
             this.txtPrecoCusto.Size = new System.Drawing.Size(167, 29);
@@ -117,7 +176,8 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(320, 259);
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(314, 282);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(128, 17);
             this.label6.TabIndex = 15;
@@ -128,8 +188,9 @@
             // 
             this.txtPrecoVenda.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtPrecoVenda.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPrecoVenda.Font = new System.Drawing.Font("Segoe UI Symbol", 10F);
             this.txtPrecoVenda.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtPrecoVenda.Location = new System.Drawing.Point(323, 279);
+            this.txtPrecoVenda.Location = new System.Drawing.Point(317, 302);
             this.txtPrecoVenda.Multiline = true;
             this.txtPrecoVenda.Name = "txtPrecoVenda";
             this.txtPrecoVenda.Size = new System.Drawing.Size(167, 29);
@@ -139,7 +200,8 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(320, 189);
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(314, 212);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 17);
             this.label5.TabIndex = 13;
@@ -150,8 +212,9 @@
             // 
             this.txtEstoqProd.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtEstoqProd.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtEstoqProd.Font = new System.Drawing.Font("Segoe UI Symbol", 10F);
             this.txtEstoqProd.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtEstoqProd.Location = new System.Drawing.Point(323, 209);
+            this.txtEstoqProd.Location = new System.Drawing.Point(317, 232);
             this.txtEstoqProd.Multiline = true;
             this.txtEstoqProd.Name = "txtEstoqProd";
             this.txtEstoqProd.Size = new System.Drawing.Size(167, 29);
@@ -161,7 +224,8 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(99, 189);
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(93, 212);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 17);
             this.label4.TabIndex = 11;
@@ -172,17 +236,19 @@
             // 
             this.txtCategoriaProd.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtCategoriaProd.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCategoriaProd.Location = new System.Drawing.Point(102, 151);
+            this.txtCategoriaProd.Font = new System.Drawing.Font("Segoe UI Symbol", 10F);
+            this.txtCategoriaProd.Location = new System.Drawing.Point(96, 174);
             this.txtCategoriaProd.Multiline = true;
             this.txtCategoriaProd.Name = "txtCategoriaProd";
-            this.txtCategoriaProd.Size = new System.Drawing.Size(388, 26);
+            this.txtCategoriaProd.Size = new System.Drawing.Size(168, 26);
             this.txtCategoriaProd.TabIndex = 10;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(100, 131);
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(94, 154);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 17);
             this.label3.TabIndex = 9;
@@ -193,7 +259,8 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(99, 76);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(93, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(119, 17);
             this.label2.TabIndex = 7;
@@ -206,7 +273,7 @@
             this.btnCadastrarProd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCadastrarProd.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCadastrarProd.ForeColor = System.Drawing.Color.White;
-            this.btnCadastrarProd.Location = new System.Drawing.Point(415, 325);
+            this.btnCadastrarProd.Location = new System.Drawing.Point(409, 348);
             this.btnCadastrarProd.Name = "btnCadastrarProd";
             this.btnCadastrarProd.Size = new System.Drawing.Size(75, 41);
             this.btnCadastrarProd.TabIndex = 8;
@@ -218,8 +285,9 @@
             // 
             this.txtQuantProd.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtQuantProd.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtQuantProd.Font = new System.Drawing.Font("Segoe UI Symbol", 10F);
             this.txtQuantProd.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.txtQuantProd.Location = new System.Drawing.Point(103, 209);
+            this.txtQuantProd.Location = new System.Drawing.Point(97, 232);
             this.txtQuantProd.Multiline = true;
             this.txtQuantProd.Name = "txtQuantProd";
             this.txtQuantProd.Size = new System.Drawing.Size(167, 29);
@@ -229,60 +297,47 @@
             // 
             this.txtNomeProd.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtNomeProd.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtNomeProd.Location = new System.Drawing.Point(103, 96);
+            this.txtNomeProd.Font = new System.Drawing.Font("Segoe UI Symbol", 10F);
+            this.txtNomeProd.Location = new System.Drawing.Point(97, 119);
             this.txtNomeProd.Multiline = true;
             this.txtNomeProd.Name = "txtNomeProd";
             this.txtNomeProd.Size = new System.Drawing.Size(313, 26);
             this.txtNomeProd.TabIndex = 0;
             // 
-            // textBox1
+            // txtCodProduto
             // 
-            this.textBox1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(439, 96);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(51, 26);
-            this.textBox1.TabIndex = 20;
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            this.txtCodProduto.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtCodProduto.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtCodProduto.Font = new System.Drawing.Font("Segoe UI Symbol", 10F);
+            this.txtCodProduto.Location = new System.Drawing.Point(316, 174);
+            this.txtCodProduto.Multiline = true;
+            this.txtCodProduto.Name = "txtCodProduto";
+            this.txtCodProduto.Size = new System.Drawing.Size(168, 26);
+            this.txtCodProduto.TabIndex = 25;
             // 
-            // label1
+            // label8
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(438, 76);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 17);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Código";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(314, 154);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(106, 17);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "Codigo Produto";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnConsultar
+            // label9
             // 
-            this.btnConsultar.BackColor = System.Drawing.Color.Black;
-            this.btnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConsultar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConsultar.ForeColor = System.Drawing.Color.White;
-            this.btnConsultar.Location = new System.Drawing.Point(496, 100);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(28, 22);
-            this.btnConsultar.TabIndex = 22;
-            this.btnConsultar.Text = "+";
-            this.btnConsultar.UseVisualStyleBackColor = false;
-            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(104, 325);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 41);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "EXCLUIR";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI Symbol", 20.22F, System.Drawing.FontStyle.Bold);
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(195, 8);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(203, 37);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "Editar Produto";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EditarProd
             // 
@@ -322,5 +377,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnConsultar;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtCodProduto;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

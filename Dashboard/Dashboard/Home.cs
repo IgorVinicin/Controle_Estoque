@@ -20,11 +20,18 @@ namespace Dashboard
     {
         public frmDashBoard()
         {
-
+            this.DoubleBuffered = true;
+            this.ResizeRedraw = true; // redesenha ao redimensionar
             InitializeComponent();
             RoundPanelCorners(panelVendas, 20);
             RoundPanelCorners(panelRei, 20);
-
+            txtQuant.BackColor = Color.FromArgb(30, 41, 59);
+            cmbCategoria.BackColor = Color.FromArgb(30, 41, 59);
+            cmbProd.BackColor = Color.FromArgb(30, 41, 59);
+            cmbFormaPagamento.BackColor = Color.FromArgb(30, 41, 59);
+            listViewProd.BackColor = Color.FromArgb(30, 41, 59);
+            listViewHistorico.BackColor = Color.FromArgb(30, 41, 59);
+            listViewEstoque.BackColor = Color.FromArgb(30, 41, 59);
         }
 
         private void RoundPanelCorners(Panel panel, int cornerRadius)
@@ -87,7 +94,7 @@ namespace Dashboard
             if (listViewProd.Columns.Count == 0)
             {
                 listViewProd.View = View.Details;
-                listViewProd.Columns.Add("Produto", 100);
+                listViewProd.Columns.Add("Produto", 150);
                 listViewProd.Columns.Add("Quantidade", 110);
                 listViewProd.Columns.Add("Forma Pagamento", 150);
 
@@ -96,7 +103,8 @@ namespace Dashboard
             {
                 listViewEstoque.View = View.Details;
                 listViewEstoque.Columns.Add("ID", 100);
-                listViewEstoque.Columns.Add("Produto", 400);
+                listViewEstoque.Columns.Add("Produto", 150);
+                listViewEstoque.Columns.Add("CodProduto", 150);
                 listViewEstoque.Columns.Add("Categoria", 150);
                 listViewEstoque.Columns.Add("Quantidade", 100);
                 listViewEstoque.Columns.Add("EstoqueMinimo", 100);
@@ -109,7 +117,7 @@ namespace Dashboard
             {
                 listViewHistorico.View = View.Details;
                 listViewHistorico.Columns.Add("Produto", 400);
-                listViewEstoque.Columns.Add("Categoria", 150);
+                listViewHistorico.Columns.Add("Categoria", 150);
                 listViewHistorico.Columns.Add("TotalVenda", 200);
                 listViewHistorico.Columns.Add("Data", 200);
                 listViewHistorico.Columns.Add("Forma de Pagamento", 200);
@@ -130,7 +138,7 @@ namespace Dashboard
                 using (MySqlConnection conexao = new MySqlConnection(connectionString))
                 {
                     conexao.Open();
-                    string query = "SELECT id_produto, NomeProduto, Categoria, Quantidade, EstoqueMinimo, PrecoCusto, PrecoVenda, data_cadastro FROM produtos";
+                    string query = "SELECT id_produto, NomeProduto, CodProduto, Categoria, Quantidade, EstoqueMinimo, PrecoCusto, PrecoVenda, data_cadastro FROM produtos";
                     using (MySqlCommand command = new MySqlCommand(query, conexao))
                     {
                         using (MySqlDataReader reader = command.ExecuteReader())
@@ -142,7 +150,9 @@ namespace Dashboard
                                 int quantidade = Convert.ToInt32(reader["Quantidade"]);
                                 int estoqueMinimo = Convert.ToInt32(reader["EstoqueMinimo"]);
 
+
                                 item.SubItems.Add(reader["NomeProduto"].ToString());
+                                item.SubItems.Add(reader["CodProduto"].ToString());
                                 item.SubItems.Add(reader["Categoria"].ToString());
                                 item.SubItems.Add(reader["Quantidade"].ToString());
                                 item.SubItems.Add(reader["EstoqueMinimo"].ToString());
@@ -724,6 +734,55 @@ namespace Dashboard
 
             }
             
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            FormConsertos formConsertos = new FormConsertos();
+            formConsertos.Show();
+        }
+
+        private void frmDashBoard_Paint(object sender, PaintEventArgs e)
+        {
+          
+        }
+
+        private void panelRei_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            // NÃO chamar base.OnPaintBackground(e);
+            // Isso evita que o fundo padrão sobrescreva o degradê
+
+            Rectangle area = this.ClientRectangle;
+
+            using (LinearGradientBrush brush = new LinearGradientBrush(
+                area,
+                Color.Black,
+                Color.Black,
+                LinearGradientMode.Vertical))
+            {
+                ColorBlend blend = new ColorBlend
+                {
+                    Colors = new Color[]
+                    {
+                Color.FromArgb(2, 6, 23),    // #020617 (topo)
+                Color.FromArgb(15, 23, 42),  // #0F172A (meio)
+                Color.FromArgb(30, 41, 59)   // #1E293B (base)
+                    },
+                    Positions = new float[] { 0f, 0.5f, 1f }
+                };
+
+                brush.InterpolationColors = blend;
+                e.Graphics.FillRectangle(brush, area);
+            }
         }
     }
 }

@@ -95,11 +95,6 @@ C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\E
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\ExcelDataReader.DataSet.pdb
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\ExcelDataReader.DataSet.xml
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\System.ValueTuple.xml
-C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\Dashboard.exe.manifest
-C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\Dashboard.application
-C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.exe.manifest
-C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.application
-C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.exe.config
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\EPPlus.dll
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\EPPlus.Interfaces.dll
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
@@ -126,3 +121,9 @@ C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\M
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\RBush.xml
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\SixLabors.Fonts.xml
 C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.EditarProd.resources
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.exe.config
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\Dashboard.exe.manifest
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\bin\Debug\Dashboard.application
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.exe.manifest
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.application
+C:\Users\Micro\Documents\GitHub\Controle_Estoque\Dashboard\Dashboard\obj\Debug\Dashboard.FormConsertos.resources

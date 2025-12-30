@@ -24,6 +24,7 @@ CREATE TABLE produtos (
     precoCusto DECIMAL(10,2) NOT NULL,
     precoVenda DECIMAL(10,2) NOT NULL,
     EstoqueMinimo INT DEFAULT 0,
+    CodProduto Varchar(100) not null,
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -54,4 +55,9 @@ VALUES
 ('Crédito'),
 ('Pix'),
 ('Dinheiro');
+
+
+
+
+
 

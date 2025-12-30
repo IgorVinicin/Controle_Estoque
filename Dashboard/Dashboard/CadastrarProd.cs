@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace Dashboard
     {
         public CadastrarProd()
         {
+            this.DoubleBuffered = true;
+            this.ResizeRedraw = true; // redesenha ao redimensionar
             InitializeComponent();
         }
 
@@ -31,6 +34,7 @@ namespace Dashboard
         {
             string nmProduto = "";
             string categoria = "";
+            string CodProduto = "";
             int quantidade = 0;
             int estoquemin = 0;
             decimal precoCusto = 0;
@@ -44,6 +48,7 @@ namespace Dashboard
             estoquemin = int.Parse(txtEstoqProd.Text);
             precoCusto = decimal.Parse(txtPrecoCusto.Text);
             precoVenda = decimal.Parse(txtPrecoVenda.Text);
+            CodProduto = txtCodProduto.Text;
 
 
             try
@@ -52,8 +57,8 @@ namespace Dashboard
                 using (MySqlConnection conexao = new MySqlConnection(conexaoString))
                     {
                     conexao.Open();
-                    string query = "INSERT INTO produtos (NomeProduto, Categoria, Quantidade, EstoqueMinimo, PrecoCusto, PrecoVenda) " +
-                                   "VALUES (@NomeProduto, @Categoria, @Quantidade, @EstoqueMinimo, @PrecoCusto, @PrecoVenda)";
+                    string query = "INSERT INTO produtos (NomeProduto, Categoria, Quantidade, EstoqueMinimo, PrecoCusto, PrecoVenda, CodProduto) " +
+                                   "VALUES (@NomeProduto, @Categoria, @Quantidade, @EstoqueMinimo, @PrecoCusto, @PrecoVenda, @CodProduto)";
                     using (MySqlCommand comando = new MySqlCommand(query, conexao))
                     {
                         comando.Parameters.AddWithValue("@NomeProduto", nmProduto);
@@ -62,6 +67,7 @@ namespace Dashboard
                         comando.Parameters.AddWithValue("@EstoqueMinimo", estoquemin);
                         comando.Parameters.AddWithValue("@PrecoCusto", precoCusto);
                         comando.Parameters.AddWithValue("@PrecoVenda", precoVenda);
+                        comando.Parameters.AddWithValue("@CodProduto", CodProduto);
                         int linhasAfetadas = comando.ExecuteNonQuery();
                         if (linhasAfetadas > 0)
                         {
@@ -121,9 +127,10 @@ namespace Dashboard
                                     decimal estoquemin = Convert.ToDecimal(tabela.Rows[i][3]);
                                     decimal precoCusto = Convert.ToDecimal(tabela.Rows[i][4]);
                                     decimal precoVenda = Convert.ToDecimal(tabela.Rows[i][5]);
+                                    string CodProduto = tabela.Rows[i][6].ToString();
 
-                                    string query = "INSERT INTO produtos (NomeProduto, Categoria, Quantidade, EstoqueMinimo, PrecoCusto, PrecoVenda) " +
-                                                   "VALUES (@NomeProduto, @Categoria, @Quantidade, @EstoqueMinimo, @PrecoCusto, @PrecoVenda)";
+                                    string query = "INSERT INTO produtos (NomeProduto, Categoria, Quantidade, EstoqueMinimo, PrecoCusto, PrecoVenda, CodProduto) " +
+                                                   "VALUES (@NomeProduto, @Categoria, @Quantidade, @EstoqueMinimo, @PrecoCusto, @PrecoVenda, @CodProduto)";
 
                                     using (MySqlCommand comando = new MySqlCommand(query, conexao))
                                     {
@@ -133,6 +140,7 @@ namespace Dashboard
                                         comando.Parameters.AddWithValue("@EstoqueMinimo", estoquemin);
                                         comando.Parameters.AddWithValue("@PrecoCusto", precoCusto);
                                         comando.Parameters.AddWithValue("@PrecoVenda", precoVenda);
+                                        comando.Parameters.AddWithValue("@CodProduto", CodProduto);
 
                                         comando.ExecuteNonQuery();
                                     }
@@ -147,6 +155,36 @@ namespace Dashboard
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao importar produtos: " + ex.Message);
+            }
+
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            // NÃO chamar base.OnPaintBackground(e);
+            // Isso evita que o fundo padrão sobrescreva o degradê
+
+            Rectangle area = this.ClientRectangle;
+
+            using (LinearGradientBrush brush = new LinearGradientBrush(
+                area,
+                Color.Black,
+                Color.Black,
+                LinearGradientMode.Vertical))
+            {
+                ColorBlend blend = new ColorBlend
+                {
+                    Colors = new Color[]
+                    {
+                Color.FromArgb(2, 6, 23),    // #020617 (topo)
+                Color.FromArgb(15, 23, 42),  // #0F172A (meio)
+                Color.FromArgb(30, 41, 59)   // #1E293B (base)
+                    },
+                    Positions = new float[] { 0f, 0.5f, 1f }
+                };
+
+                brush.InterpolationColors = blend;
+                e.Graphics.FillRectangle(brush, area);
             }
         }
     }

@@ -1,13 +1,14 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 
 namespace Dashboard
@@ -16,6 +17,9 @@ namespace Dashboard
     {
         public EditarProd()
         {
+            this.DoubleBuffered = true;
+            this.ResizeRedraw = true; // redesenha ao redimensionar
+            
             InitializeComponent();
 
         }
@@ -40,7 +44,7 @@ namespace Dashboard
                     {
                     conexao.Open();
                     string query = "UPDATE produtos SET NomeProduto = @NomeProduto, Categoria = @Categoria, Quantidade = @Quantidade, " +
-                                   "EstoqueMinimo = @EstoqueMinimo, PrecoCusto = @PrecoCusto, PrecoVenda = @PrecoVenda WHERE id_produto = @idProduto";
+                                   "EstoqueMinimo = @EstoqueMinimo, PrecoCusto = @PrecoCusto, PrecoVenda = @PrecoVenda, CodProduto = @CodProduto WHERE id_produto = @idProduto";
                     using (MySqlCommand comando = new MySqlCommand(query, conexao))
                     {
                         comando.Parameters.AddWithValue("@NomeProduto", txtNomeProd.Text);
@@ -49,6 +53,7 @@ namespace Dashboard
                         comando.Parameters.AddWithValue("@EstoqueMinimo", int.Parse(txtEstoqProd.Text));
                         comando.Parameters.AddWithValue("@PrecoCusto", decimal.Parse(txtPrecoCusto.Text));
                         comando.Parameters.AddWithValue("@PrecoVenda", decimal.Parse(txtPrecoVenda.Text));
+                        comando.Parameters.AddWithValue("@CodProduto", txtCodProduto.Text);
                         comando.Parameters.AddWithValue("@idProduto", int.Parse(textBox1.Text));
                         comando.ExecuteNonQuery();
                         MessageBox.Show("Produto atualizado com sucesso!");
@@ -98,6 +103,7 @@ namespace Dashboard
                                     txtEstoqProd.Text = leitor["EstoqueMinimo"].ToString();
                                     txtPrecoCusto.Text = leitor["PrecoCusto"].ToString();
                                     txtPrecoVenda.Text = leitor["PrecoVenda"].ToString();
+                                    txtCodProduto.Text = leitor["CodProduto"].ToString();
                                 }
                                 else
                                 {
@@ -141,6 +147,35 @@ namespace Dashboard
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao conectar ao banco de dados: " + ex.Message);
+            }
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            // NÃO chamar base.OnPaintBackground(e);
+            // Isso evita que o fundo padrão sobrescreva o degradê
+
+            Rectangle area = this.ClientRectangle;
+
+            using (LinearGradientBrush brush = new LinearGradientBrush(
+                area,
+                Color.Black,
+                Color.Black,
+                LinearGradientMode.Vertical))
+            {
+                ColorBlend blend = new ColorBlend
+                {
+                    Colors = new Color[]
+                    {
+                Color.FromArgb(2, 6, 23),    // #020617 (topo)
+                Color.FromArgb(15, 23, 42),  // #0F172A (meio)
+                Color.FromArgb(30, 41, 59)   // #1E293B (base)
+                    },
+                    Positions = new float[] { 0f, 0.5f, 1f }
+                };
+
+                brush.InterpolationColors = blend;
+                e.Graphics.FillRectangle(brush, area);
             }
         }
     }
